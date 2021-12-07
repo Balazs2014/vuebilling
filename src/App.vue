@@ -74,7 +74,7 @@ export default {
             this.edit = true
         },
         Save() {
-            this.e.edit = false
+            this.edit = false
             this.$emit('sor-item-changed', {
                 original: {
                     title: this.title,
