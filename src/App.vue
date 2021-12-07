@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <Raktar :tetelek="rows" @hozzaad="hozzaad" @torol="torol"/>
+    <Raktar 
+    :tetelek="rows"
+    @add="add" 
+    @deletef="deletef"/>
   </div>
 </template>
 <script>
@@ -39,17 +42,15 @@ export default {
     }
   },
   methods: {
-    hozzaad(e){
+    add(e){
         this.rows.push({ 
           title: e.title,
           price: e.price,
           quantity: e.quantity 
         })
     },
-    torol(e){
-      this.rows = this.rows.filter(function(item) {
-        return item.title != e
-      })
+    deletef(e){
+      this.rows.splice(this.rows.indexOf(e.original), 1);
     }
   }
 }

@@ -1,7 +1,8 @@
 <template>
     <tr>
         <td v-for="tetel in tetel" :key="tetel">{{ tetel }}</td>
-        <td><button @click="torol">X</button><button>Edit</button></td>
+        <td><button @click="deletef">X</button><button>Edit</button></td>
+        <td>{{tetel.quantity*tetel.price}}</td>
     </tr>
 </template>
 
@@ -9,8 +10,8 @@
 export default {
     props: ["tetel"],
     methods: {
-        torol(){
-            this.$emit("torol", this.sor.title)
+        deletef(){
+            this.$emit("deletef", this.sor.title)
         }
     }
 }

@@ -6,16 +6,17 @@
               <th>Price</th>
               <th>Quantity</th>
               <th>Operations</th>
+              <th>Összérték</th>
           </tr>
           <Tetel v-for="tetel in tetelek"
           :key="tetel.title"
           :tetel="tetel"
-          @torol="torol"/>
+          @deletef="deletef"/>
           <tr>
               <td><input type="text" v-model="title"></td>
               <td><input type="number" v-model="price"></td>
               <td><input type="number" v-model="quantity"></td>
-              <td><button @click="hozzaad">Hozzáad</button></td>
+              <td><button @click="add">Hozzáad</button></td>
           </tr>
       </table>
   </div>
@@ -36,14 +37,14 @@ export default {
         }
     },
     methods: {
-        hozzaad(){
-            this.$emit("hozzaad", { title: this.title, price: this.price, quantity: this.quantity})
+        add(){
+            this.$emit("add", { title: this.title, price: this.price, quantity: this.quantity})
             this.title = null
             this.price = null
             this.quantity = null
         },
-        torol(e){
-            this.$emit("torol", e)
+        deletef(e){
+            this.$emit("deletef", e)
         }
     }
 }
