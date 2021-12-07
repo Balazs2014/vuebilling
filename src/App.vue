@@ -1,27 +1,39 @@
 <template>
-  <table>
+<div>
+  <table v-if="!edit">
       <tr>
           <th>Title</th>
           <th>Price</th>
           <th>Quantity</th>
           <th>Operations</th>
+          <th>Összérték</th>
       </tr>
       <tr v-for="tetel in rows"
-        v-bind:key="tetel.title">
+        v-bind:key="tetel.title"
+        @sor-item-changed="Changed">
         <td>{{ tetel.title }}</td>
         <td>{{ tetel.price }}</td>
         <td>{{ tetel.quantity }}</td>
         <td>
-          <button>X</button>
-          <button>Edit</button>
+          <button @click="Delete">X</button>
+          <button @click="Edit">Edit</button>
         </td>
+        <td>{{ tetel.price * tetel.quantity }}</td>
       </tr>
       <tr>
         <td><input type="text"></td>
         <td><input type="number"></td>
         <td><input type="number"></td>
+        <button>Hozzáad</button>
       </tr>
   </table>
+  <div v-if="edit">
+    <input type="text" v-model="title">
+    <input type="number" v-model="price">
+    <input type="number" v-model="quantity">
+    <button @click="Save">Save</button>
+  </div>
+</div>
 </template>
 <script>
 
@@ -30,6 +42,7 @@ export default {
   name: 'App',
   data() {
     return {
+      edit: false,
       rows: [
         {
           title: 'Kerék',
@@ -53,7 +66,29 @@ export default {
         },
       ]
     }
-  }
+  },  methods: {
+        Changed(e) {
+            this.$emit('sor-item-changed', e)
+        },
+        Edit() {
+            this.edit = true
+        },
+        Save() {
+            this.edit = false
+            this.$emit('sor-item-changed', {
+                original: {
+                    title: this.title,
+                    price: this.price,
+                    quantity: this.quantity
+                    },
+                new: {
+                    title: this.title,
+                    price: this.price,
+                    quantity: this.quantity
+                    },
+            })
+        }
+    }
 }
 </script>
 
