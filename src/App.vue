@@ -1,17 +1,23 @@
 <template>
-  <div id="app">
-    <Raktar :tetel="rows"/>
-  </div>
+  <table>
+      <tr>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Quantity</th>
+      </tr>
+      <tr v-for="tetel in rows"
+        v-bind:key="tetel.title">
+        <td>{{ tetel.title }}</td>
+        <td>{{ tetel.price }}</td>
+        <td>{{ tetel.quantity }}</td>
+      </tr>
+  </table>
 </template>
-
 <script>
-import Raktar from './components/Raktar.vue'
+
 
 export default {
   name: 'App',
-  components: {
-    Raktar
-  },
   data() {
     return {
       rows: [
