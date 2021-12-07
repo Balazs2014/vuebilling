@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="app">
   <table v-if="!edit">
       <tr>
           <th>Title</th>
@@ -10,7 +10,8 @@
       </tr>
       <tr v-for="tetel in rows"
         v-bind:key="tetel.title"
-        @sor-item-changed="Changed">
+        @sor-item-changed="Changed"
+        @sor-item-delete="Delete">
         <td>{{ tetel.title }}</td>
         <td>{{ tetel.price }}</td>
         <td>{{ tetel.quantity }}</td>
@@ -36,7 +37,6 @@
 </div>
 </template>
 <script>
-
 
 export default {
   name: 'App',
@@ -74,7 +74,7 @@ export default {
             this.edit = true
         },
         Save() {
-            this.edit = false
+            this.e.edit = false
             this.$emit('sor-item-changed', {
                 original: {
                     title: this.title,
@@ -87,6 +87,9 @@ export default {
                     quantity: this.quantity
                     },
             })
+        },
+        Delete(e){
+            this.$emit('sor-item-delete', e)
         }
     }
 }
