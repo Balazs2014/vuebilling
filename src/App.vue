@@ -4,12 +4,22 @@
           <th>Title</th>
           <th>Price</th>
           <th>Quantity</th>
+          <th>Operations</th>
       </tr>
       <tr v-for="tetel in rows"
         v-bind:key="tetel.title">
         <td>{{ tetel.title }}</td>
         <td>{{ tetel.price }}</td>
         <td>{{ tetel.quantity }}</td>
+        <td>
+          <button>X</button>
+          <button>Edit</button>
+        </td>
+      </tr>
+      <tr>
+        <td><input type="text"></td>
+        <td><input type="number"></td>
+        <td><input type="number"></td>
       </tr>
   </table>
 </template>
